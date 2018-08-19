@@ -30,9 +30,3 @@
 *.exe
 *.out
 *.app
-
-# __pycache__
-*__pycache__*
-
-# arduino libraries
-*arduino/hardware*

@@ -1,0 +1,18 @@
+{% include 'header.html' %}
+
+<body>
+    <p>Because official bunting data should be used.</p>
+    <p/>
+    <p>Upon spotting that the UK government included a 'bunting' field in its' Bank Holiday <a href="https://www.gov.uk/bank-holidays.json">data</a>, I felt that it needed to be used for something.</p>
+    <pre>{"title":"New Year’s Day","date":"2012-01-02","notes":"Substitute day","bunting":true}</pre>
+    <p>My immediate thought was a robot to automatically deploy bunting on days when it is needed, so I set about building one. This was
+        in part an attempt to learn more about the use and control of motors, something I've always wanted to be able to do, and to
+        improve my almost non-existent abilities with C++.</p>
+    <p>Unfortunately I was having trouble retrieving and decoding the large JSON string on an ESP32 (largely, I suspect, due to my own
+        inexperience with such devices) so I put together a small website to pre-process the data and return only the data for today.
+        That is what you see here</p>
+    <p/>
+    <p>TODO: Write up Bunting Machine</p>
+</body>
+
+{% include 'footer.html' %}

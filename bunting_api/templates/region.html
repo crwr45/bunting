@@ -1,0 +1,16 @@
+{% include 'header.html' %}
+
+<body>
+
+<h1>Do I need bunting today in {{ data.region }}?</h1>
+
+{% if data.bunting %}
+    <p>YES!</p>
+    <p>It's {{ data.title }}.</p>
+{% else %}
+    <p>NO :(</p>
+{% endif %}
+
+</body>
+
+{% include 'footer.html' %}

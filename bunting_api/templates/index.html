@@ -1,0 +1,13 @@
+{% include 'header.html' %}
+
+<body>
+
+<h1>Do I need bunting today?</h1>
+
+{% for region_url, region in regions.items() %}
+    <p><a href="{{ region_url }}">{{ region.region }}</a>: {% if region.bunting %}YES!{% else %}NO{% endif %}</p>
+{% endfor %}
+
+</body>
+
+{% include 'footer.html' %}
