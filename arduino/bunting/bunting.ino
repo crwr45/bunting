@@ -6,7 +6,7 @@
 // Motor steps per revolution.
 #define MOTOR_STEPS 200
 #define RPM 25
-#define DEPLOY_DEGREES 2675
+#define DEPLOY_DEGREES 2484
 #define DIR_MULTI -1  // -1 for new version, +1 for old version
 
 // Microstepping 1=full step, 2=half step etc.
@@ -54,6 +54,7 @@ void connectWiFi() {
 }
 
 void disconnectWiFi() {
+  Serial.println("Disconnecting from WiFi");
   WiFi.disconnect(true);
   WiFi.mode(WIFI_OFF);
 }
@@ -80,6 +81,7 @@ const char* getHolidayJson() {
   static String json;
   bool success = false;
   int attempts = 0;
+  connectWiFi();
 
   do {
     http.begin(HOLIDAY_URL); //Specify the URL
@@ -100,6 +102,7 @@ const char* getHolidayJson() {
   if (success == false) {
     Serial.println("Connection failed");
   }
+  disconnectWiFi();
   return json.c_str();
 }
 
@@ -131,8 +134,8 @@ void setup() {
   delay(1000);
 
   // Connect to the WiFi
-  connectWiFi();
-  delay(1000);
+//  connectWiFi();
+//  delay(1000);
 }
 
 void loop() {
@@ -141,6 +144,7 @@ void loop() {
   } else {
     bm.store();
   }
-  delay(60000);
+  delay(3600000);
+//  delay(60000);
 }
 

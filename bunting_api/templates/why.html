@@ -1,18 +1,41 @@
 {% include 'header.html' %}
 
 <body>
-    <p>Because official bunting data should be used.</p>
+    <h2>Because official bunting data should be used.</h2>
     <p/>
-    <p>Upon spotting that the UK government included a 'bunting' field in its' Bank Holiday <a href="https://www.gov.uk/bank-holidays.json">data</a>, I felt that it needed to be used for something.</p>
+    <p>Upon spotting that the UK government included a 'bunting' field in its' Bank Holiday
+        <a href="https://www.gov.uk/bank-holidays.json">data</a>, I felt that it needed to
+        be used for something.</p>
     <pre>{"title":"New Year’s Day","date":"2012-01-02","notes":"Substitute day","bunting":true}</pre>
-    <p>My immediate thought was a robot to automatically deploy bunting on days when it is needed, so I set about building one. This was
-        in part an attempt to learn more about the use and control of motors, something I've always wanted to be able to do, and to
-        improve my almost non-existent abilities with C++.</p>
-    <p>Unfortunately I was having trouble retrieving and decoding the large JSON string on an ESP32 (largely, I suspect, due to my own
-        inexperience with such devices) so I put together a small website to pre-process the data and return only the data for today.
+    <p>My immediate thought was a robot to automatically deploy bunting on days when it is
+        needed, so I set about building one. This was in part an attempt to learn more
+        about the use and control of motors, something I've always wanted an excuse to
+        do, and to improve my almost non-existent abilities with C++.</p>
+    <p>Unfortunately I was having trouble retrieving and decoding the large JSON string on
+        an ESP32 (largely, I suspect, due to my own inexperience with such devices) so I
+        put together a small website to pre-process the data and return only the
+        <a href="http://api.doineedbunting.today/england-and-wales">data for today</a>.
         That is what you see here</p>
     <p/>
-    <p>TODO: Write up Bunting Machine</p>
+    <h2>The Machine</h2>
+    <p>The Bunting Machine itself consists of an ESP32, controlling a standard 12v NEMA17
+        stepper motor via a DRV8825 stepper motor controller. A simple leaf switch is used
+        to sense when a small knot in the string reaches it. That known position is with
+        the bunting all the way wound in, and the number of degrees of rotation needed to
+        wind the bunting out is used to deploy it.</p>
+    <p>The use of the limit switch allows the machine to reset to a known position each
+        time it turns on, even if it was half-deployed when powered off.</p>
+    <img src="{{url_for('static', filename='bunting_machine.jpg')}}" alt="Bunting Machine" />
+    <!-- todo: Better picture. -->
+    <p>The bunting is part of a continuous loop running from a wooden dowel, round a pulley,
+        and back to the dowel. The string is wound in opposite directions around the dowel
+        on either side of the pulley, so turning the dowel simultaneously winds string off
+        one side, around the pulley, and back onto the dowel on the other side.</p>
+    <p>The other main issue was the fact that winding bunting around a dowel gradually
+        increases its effective diameter, meaning one turn winds more of the string on
+        than is wound off, causing it to get very tight. This is solved by spring-loading
+        the pulley to absorb small changes in the length of the string while maintaining
+        sufficient tension.</p>
 </body>
 
 {% include 'footer.html' %}
